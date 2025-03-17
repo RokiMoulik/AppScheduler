@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        requestOverlayPermission()
+        showOverlayPermissionDialog()
 
         // setup recyclerView
         adapter = ScheduledAppAdapter (
@@ -70,14 +71,30 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         startActivity(intent)
     }
 
-    private fun requestOverlayPermission() {
-        if (!Settings.canDrawOverlays(this)) {
-            val intent = Intent(
-                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                Uri.parse("package:$packageName")
-            )
-            startActivityForResult(intent, OVERLAY_PERMISSION_REQUEST_CODE)
+    private fun showOverlayPermissionDialog() {
+        if (Settings.canDrawOverlays(this)) {
+            return
         }
+        val dialog = AlertDialog.Builder(this)
+        .setTitle("Overlay Permission Required")
+        .setMessage("This app needs the Overlay permission to launch apps in the background. Please grant the permission.")
+        .setPositiveButton("Grant Permission") { _, _ ->
+            requestOverlayPermission()  // Request permission when the user agrees
+        }
+        .setNegativeButton("Cancel") { dialog, _ ->
+            dialog.dismiss()  // Dismiss the dialog if the user cancels
+        }
+        .create()
+
+        dialog.show()  // Show the dialog
+    }
+
+    private fun requestOverlayPermission() {
+        val intent = Intent(
+            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+            Uri.parse("package:$packageName")
+        )
+        startActivityForResult(intent, OVERLAY_PERMISSION_REQUEST_CODE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
