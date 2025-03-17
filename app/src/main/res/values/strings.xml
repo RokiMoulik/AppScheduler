@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">App Scheduler</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="add_schedule">Add Schedule</string>
+    <string name="save_schedule">Save Schedule</string>
+</resources>
