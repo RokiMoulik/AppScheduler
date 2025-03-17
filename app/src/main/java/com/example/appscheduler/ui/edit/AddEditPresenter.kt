@@ -42,7 +42,7 @@ class AddEditPresenter(
                 Log.d(TAG, "saveSchedule: existing time: ${existingTimeSchedule?.scheduledTime}")
 
                 if (existingTimeSchedule != null) {
-                    view.showSaveError()
+                    view.showSaveError("A schedule already exists for this time.")
                     return@launch
                 } else if (existingPackageSchedule != null) {
                     schedulerUtil.cancelSchedule(packageName)
@@ -64,7 +64,7 @@ class AddEditPresenter(
                 view.showSaveSuccess()
             } catch (e: Exception) {
                 Log.e(TAG, "saveSchedule: $e")
-                view.showSaveError()
+                view.showSaveError("Failed to save schedule. Please try again.")
             }
         }
     }

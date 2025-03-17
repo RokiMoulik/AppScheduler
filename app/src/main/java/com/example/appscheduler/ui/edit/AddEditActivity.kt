@@ -78,9 +78,9 @@ class AddEditActivity : AppCompatActivity() , AddEditContract.View {
         finish()
     }
 
-    override fun showSaveError() {
+    override fun showSaveError(errorText: String) {
         runOnUiThread {
-            Toast.makeText(this, "Failed to save schedule. Please try again.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, errorText, Toast.LENGTH_SHORT).show()
         }
     }
 

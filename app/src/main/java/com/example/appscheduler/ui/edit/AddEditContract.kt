@@ -5,7 +5,7 @@ import com.example.appscheduler.data.entity.ScheduledApp
 interface AddEditContract {
     interface View {
         fun showSaveSuccess()
-        fun showSaveError()
+        fun showSaveError(errorText: String)
         fun populateUI(packageName: String, hour: Int, minute: Int)
     }
 
