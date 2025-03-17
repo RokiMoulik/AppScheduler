@@ -61,6 +61,12 @@ class AddEditActivity : AppCompatActivity() , AddEditContract.View {
             }
             val scheduledTime = calendar.timeInMillis
 
+            // Ensure the time is in the future
+            if (scheduledTime <= System.currentTimeMillis()) {
+                // If the selected time is in the past, add one day to make it future
+                calendar.add(Calendar.DAY_OF_YEAR, 1)
+            }
+
             presenter.saveSchedule(packageInfo.packageName, scheduledTime)
         }
     }

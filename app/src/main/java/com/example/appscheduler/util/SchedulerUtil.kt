@@ -17,7 +17,7 @@ class SchedulerUtil (private val context: Context) {
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
     fun setScheduleApp(packageName: String, scheduledTime: Long) {
-        Log.d(TAG, "setScheduleApp is called")
+        Log.d(TAG, "setScheduleApp -> scheduledTime: $scheduledTime")
 
         val intent = Intent(context, AppLaunchReceiver::class.java).apply {
             putExtra("packageName", packageName)

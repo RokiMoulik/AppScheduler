@@ -32,14 +32,21 @@ class AddEditPresenter(
     }
 
     override fun saveSchedule(packageName: String, scheduledTime: Long) {
+        Log.d(TAG, "saveSchedule: packageName: $packageName , scheduledTime: $scheduledTime")
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val existingSchedule = scheduledAppDao.getByPackageName(packageName)
-                if (existingSchedule != null) {
+                val existingPackageSchedule = scheduledAppDao.getByPackageName(packageName)
+                val existingTimeSchedule = scheduledAppDao.getByScheduledTime(scheduledTime)
 
+                Log.d(TAG, "saveSchedule: existing time: ${existingTimeSchedule?.scheduledTime}")
+
+                if (existingTimeSchedule != null) {
+                    view.showSaveError()
+                    return@launch
+                } else if (existingPackageSchedule != null) {
                     schedulerUtil.cancelSchedule(packageName)
-
-                    val updateSchedule = existingSchedule.copy(
+                    val updateSchedule = existingPackageSchedule.copy(
                         scheduledTime = scheduledTime,
                         isExecuted = false
                     )

@@ -18,6 +18,9 @@ interface ScheduledAppDao {
     @Query("SELECT * FROM scheduled_apps WHERE packageName = :packageName LIMIT 1")
     suspend fun getByPackageName(packageName: String): ScheduledApp?
 
+    @Query("SELECT * FROM scheduled_apps WHERE scheduledTime = :scheduledTime LIMIT 1")
+    suspend fun getByScheduledTime(scheduledTime: Long): ScheduledApp?
+
     @Query("SELECT * FROM scheduled_apps")
     fun getAll(): LiveData<List<ScheduledApp>>
 
