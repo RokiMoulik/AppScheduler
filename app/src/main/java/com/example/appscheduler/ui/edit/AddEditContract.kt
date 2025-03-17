@@ -1,6 +1,6 @@
 package com.example.appscheduler.ui.edit
 
-import com.example.appscheduler.model.entity.ScheduledApp
+import com.example.appscheduler.data.entity.ScheduledApp
 
 interface AddEditContract {
     interface View {

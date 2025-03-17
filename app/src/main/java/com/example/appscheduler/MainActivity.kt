@@ -1,17 +1,16 @@
 package com.example.appscheduler
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.view.inputmethod.InputBinding
-import androidx.activity.enableEdgeToEdge
+import android.provider.Settings
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appscheduler.databinding.ActivityMainBinding
-import com.example.appscheduler.model.AppDatabase
-import com.example.appscheduler.model.entity.ScheduledApp
+import com.example.appscheduler.data.AppDatabase
+import com.example.appscheduler.data.entity.ScheduledApp
 import com.example.appscheduler.ui.edit.AddEditActivity
 import com.example.appscheduler.ui.main.MainContract
 import com.example.appscheduler.ui.main.MainPresenter
@@ -30,6 +29,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        requestOverlayPermission()
 
         // setup recyclerView
         adapter = ScheduledAppAdapter (
@@ -67,5 +68,30 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             putExtra("scheduledApp", scheduledApp)
         }
         startActivity(intent)
+    }
+
+    private fun requestOverlayPermission() {
+        if (!Settings.canDrawOverlays(this)) {
+            val intent = Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:$packageName")
+            )
+            startActivityForResult(intent, OVERLAY_PERMISSION_REQUEST_CODE)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == OVERLAY_PERMISSION_REQUEST_CODE) {
+            if (Settings.canDrawOverlays(this)) {
+                Toast.makeText(this, "Overlay permission granted", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    companion object {
+        private const val OVERLAY_PERMISSION_REQUEST_CODE = 1001
     }
 }

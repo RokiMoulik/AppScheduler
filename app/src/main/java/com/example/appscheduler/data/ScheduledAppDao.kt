@@ -1,11 +1,11 @@
-package com.example.appscheduler.model
+package com.example.appscheduler.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.example.appscheduler.model.entity.ScheduledApp
+import com.example.appscheduler.data.entity.ScheduledApp
 
 @Dao
 interface ScheduledAppDao {

@@ -1,10 +1,10 @@
-package com.example.appscheduler.model
+package com.example.appscheduler.data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.appscheduler.model.entity.ScheduledApp
+import com.example.appscheduler.data.entity.ScheduledApp
 
 @Database(entities = [ScheduledApp::class], version = 1)
 abstract class AppDatabase: RoomDatabase() {

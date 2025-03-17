@@ -1,36 +1,21 @@
 package com.example.appscheduler.ui.edit
 
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.icu.util.Calendar
 import android.os.Build
 import android.os.Build.VERSION
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.DatePicker
 import android.widget.Spinner
 import android.widget.TimePicker
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.size
 import com.example.appscheduler.R
-import com.example.appscheduler.databinding.ActivityAddEditBinding
-import com.example.appscheduler.model.AppDatabase
-import com.example.appscheduler.model.entity.ScheduledApp
+import com.example.appscheduler.data.AppDatabase
+import com.example.appscheduler.data.entity.ScheduledApp
 import com.example.appscheduler.ui.main.AppSpinnerAdapter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlin.math.min
 
 class AddEditActivity : AppCompatActivity() , AddEditContract.View {
     private lateinit var appSpinner: Spinner

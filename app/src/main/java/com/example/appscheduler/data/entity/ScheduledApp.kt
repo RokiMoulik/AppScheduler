@@ -1,4 +1,4 @@
-package com.example.appscheduler.model.entity
+package com.example.appscheduler.data.entity
 
 import android.os.Parcel
 import android.os.Parcelable

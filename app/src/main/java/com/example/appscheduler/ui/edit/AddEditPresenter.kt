@@ -3,8 +3,8 @@ package com.example.appscheduler.ui.edit
 import android.content.Context
 import android.icu.util.Calendar
 import android.util.Log
-import com.example.appscheduler.model.ScheduledAppDao
-import com.example.appscheduler.model.entity.ScheduledApp
+import com.example.appscheduler.data.ScheduledAppDao
+import com.example.appscheduler.data.entity.ScheduledApp
 import com.example.appscheduler.util.SchedulerUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

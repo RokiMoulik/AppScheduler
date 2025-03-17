@@ -2,11 +2,8 @@ package com.example.appscheduler.ui.main
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.graphics.drawable.Icon
 import android.icu.util.Calendar
-import android.media.Image
 import android.view.LayoutInflater
-import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -16,7 +13,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appscheduler.R
-import com.example.appscheduler.model.entity.ScheduledApp
+import com.example.appscheduler.data.entity.ScheduledApp
 
 class ScheduledAppAdapter (
     private val onEditClick: (ScheduledApp) -> Unit,
@@ -55,9 +52,9 @@ class ScheduledAppAdapter (
             isExecuted.text = scheduledApp.isExecuted.toString()
 
             if (scheduledApp.isExecuted) {
-                isExecuted.text = "Status: Already Executed"
+                isExecuted.text = "Status: Executed"
             } else {
-                isExecuted.text = "Status: Not Started Yet"
+                isExecuted.text = "Status: Pending"
             }
 
             val packageName = scheduledApp.packageName

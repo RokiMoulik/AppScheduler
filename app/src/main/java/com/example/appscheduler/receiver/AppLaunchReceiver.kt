@@ -4,7 +4,8 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import com.example.appscheduler.model.AppDatabase
+import com.example.appscheduler.data.AppDatabase
+import com.example.appscheduler.service.AppLaunchService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,10 +16,10 @@ class AppLaunchReceiver: BroadcastReceiver() {
         Log.i(TAG, "onReceive -> packageName: $packageName")
 
         packageName?.let {
-            val launchIntent = context?.packageManager?.getLaunchIntentForPackage(packageName)
-            launchIntent?.let {
-                context.startActivity(launchIntent)
-            }
+            val serviceIntent = Intent(context, AppLaunchService::class.java).apply {
+                    putExtra("packageName", packageName)
+                }
+            context?.startService(serviceIntent)
 
             CoroutineScope(Dispatchers.IO).launch {
                 // update the database

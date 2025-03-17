@@ -1,6 +1,6 @@
 package com.example.appscheduler.ui.main
 
-import com.example.appscheduler.model.entity.ScheduledApp
+import com.example.appscheduler.data.entity.ScheduledApp
 
 interface MainContract {
     interface View {

@@ -1,11 +1,10 @@
 package com.example.appscheduler.ui.main
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.LiveData
-import com.example.appscheduler.model.ScheduledAppDao
-import com.example.appscheduler.model.entity.ScheduledApp
+import com.example.appscheduler.data.ScheduledAppDao
+import com.example.appscheduler.data.entity.ScheduledApp
 import com.example.appscheduler.util.SchedulerUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
